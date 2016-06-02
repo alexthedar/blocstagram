@@ -47,11 +47,13 @@
 
 #pragma mark - Table view data source
 
-
+- (NSArray *) items {
+    return [DataSource sharedInstance].mediaItems;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return [DataSource sharedInstance].mediaItems.count;
+    return [self items].count;
 }
 
 
@@ -68,14 +70,14 @@
         imageView.tag = imageViewTag;
         [cell.contentView addSubview:imageView];
     }
-    Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
+    Media *item = [self items][indexPath.row];
     imageView.image = item.image;
     
     return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
+    Media *item = [self items][indexPath.row];
     UIImage *image = item.image;
     
     return image.size.height / image.size.width * CGRectGetWidth(self.view.frame);
@@ -89,7 +91,7 @@
     return YES;
 }
 
-
+*/
 /*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,7 +103,7 @@
     }
 }
 
-
+*/
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
