@@ -27,6 +27,7 @@
 		76B19E581CFFECB00033AC62 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E571CFFECB00033AC62 /* Media.m */; };
 		76B19E5B1CFFED0E0033AC62 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E5A1CFFED0E0033AC62 /* Comment.m */; };
 		76B19E5E1CFFED480033AC62 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E5D1CFFED480033AC62 /* DataSource.m */; };
+		76B19E611D0075D50033AC62 /* MediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E601D0075D50033AC62 /* MediaTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		76B19E5A1CFFED0E0033AC62 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		76B19E5C1CFFED480033AC62 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
 		76B19E5D1CFFED480033AC62 /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
+		76B19E5F1D0075D50033AC62 /* MediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaTableViewCell.h; path = ../MediaTableViewCell.h; sourceTree = "<group>"; };
+		76B19E601D0075D50033AC62 /* MediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaTableViewCell.m; path = ../MediaTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				76B19E3B1CFF2C150033AC62 /* images */,
+				76B19E5F1D0075D50033AC62 /* MediaTableViewCell.h */,
+				76B19E601D0075D50033AC62 /* MediaTableViewCell.m */,
 				76B19E191CFF2A950033AC62 /* AppDelegate.h */,
 				76B19E1A1CFF2A950033AC62 /* AppDelegate.m */,
 				76B19E501CFF2CC10033AC62 /* ImagesTableViewController.h */,
@@ -277,6 +282,7 @@
 			files = (
 				76B19E551CFFEC610033AC62 /* User.m in Sources */,
 				76B19E5B1CFFED0E0033AC62 /* Comment.m in Sources */,
+				76B19E611D0075D50033AC62 /* MediaTableViewCell.m in Sources */,
 				76B19E581CFFECB00033AC62 /* Media.m in Sources */,
 				76B19E1B1CFF2A950033AC62 /* AppDelegate.m in Sources */,
 				76B19E5E1CFFED480033AC62 /* DataSource.m in Sources */,
