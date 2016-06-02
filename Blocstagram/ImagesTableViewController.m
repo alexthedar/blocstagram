@@ -18,15 +18,17 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+
         self.images = [NSMutableArray array];
         
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
     for (int i = 1; i <= 10; i++) {
         NSString *imageName = [NSString stringWithFormat:@"%d.jpg", i];
         UIImage *image = [UIImage imageNamed:imageName];
@@ -34,40 +36,46 @@
             [self.images addObject:image];
         }
     }
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"imageCell"];
+
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+    return self.images.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    static NSInteger imageViewTag =1234;
+    UIImageView *imageView = (UIImageView*) [cell.contentView viewWithTag:imageViewTag];
+    if (!imageView) {
+        imageView = [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleToFill;
+        imageView.frame = cell.contentView.bounds;
+        imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        imageView.tag = imageViewTag;
+        [cell.contentView addSubview:imageView];
+    }
+    UIImage *image = self.images[indexPath.row];
+    imageView.image = image;
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
