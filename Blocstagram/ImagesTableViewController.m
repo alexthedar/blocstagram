@@ -76,6 +76,10 @@
     return cell;
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIImage *image = self.images[indexPath.row];
+    return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height;
+}
 
 /*
 // Override to support conditional editing of the table view.
