@@ -35,8 +35,9 @@ static NSParagraphStyle *paragraphStyle;
     usernameLabelGray = [UIColor colorWithRed:0.933 green:0.933 blue:0.933 alpha:1];
     commentLabelGray = [UIColor colorWithRed:0.898 green:0.898 blue:0.898 alpha:1];
     linkColor = [UIColor colorWithRed:0.345 green:0.314 blue:0.427 alpha:1];
+    firstComment = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0];
     
-    //add firstcomment as orange here
+
     
     NSMutableParagraphStyle *mutableParagraphStyle = [[NSMutableParagraphStyle alloc] init];
     mutableParagraphStyle.headIndent = 20.0;
@@ -59,8 +60,11 @@ static NSParagraphStyle *paragraphStyle;
 
 - (NSAttributedString *) commentString {
     NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] init];
-    
+//    NSUInteger count = 0;
     for (Comment *comment in self.mediaItem.comments) {
+//        
+//        NSUInteger index = [self.mediaItem.comments indexOfObject:comment];
+//        NSString *firstComment = [self.mediaItem.comments objectAtIndex:0];
 
         NSString *baseString = [NSString stringWithFormat:@"%@ %@\n", comment.from.userName, comment.text];
 
@@ -68,10 +72,16 @@ static NSParagraphStyle *paragraphStyle;
         NSMutableAttributedString *oneCommentString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : lightFont, NSParagraphStyleAttributeName : paragraphStyle}];
         
         NSRange usernameRange = [baseString rangeOfString:comment.from.userName];
+        
+
+        
         [oneCommentString addAttribute:NSFontAttributeName value:boldFont range:usernameRange];
         [oneCommentString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
-        
+//        if (count==0) {
+//            [oneCommentString addAttribute:NSFontAttributeName value:firstComment range:];
+//        }
         [commentString appendAttributedString:oneCommentString];
+//        count++;
     }
     
     return commentString;
