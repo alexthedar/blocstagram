@@ -60,28 +60,29 @@ static NSParagraphStyle *paragraphStyle;
 
 - (NSAttributedString *) commentString {
     NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] init];
-//    NSUInteger count = 0;
+    NSUInteger count = 0;
     for (Comment *comment in self.mediaItem.comments) {
 //        
 //        NSUInteger index = [self.mediaItem.comments indexOfObject:comment];
 //        NSString *firstComment = [self.mediaItem.comments objectAtIndex:0];
 
-        NSString *baseString = [NSString stringWithFormat:@"%@ %@\n", comment.from.userName, comment.text];
+        NSString *baseString = [NSString stringWithFormat:@"%@| %@\n", comment.from.userName, comment.text];
 
         
         NSMutableAttributedString *oneCommentString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : lightFont, NSParagraphStyleAttributeName : paragraphStyle}];
         
         NSRange usernameRange = [baseString rangeOfString:comment.from.userName];
+        NSRange commentRange = [baseString rangeOfString:comment.text];
         
 
         
         [oneCommentString addAttribute:NSFontAttributeName value:boldFont range:usernameRange];
         [oneCommentString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
-//        if (count==0) {
-//            [oneCommentString addAttribute:NSFontAttributeName value:firstComment range:];
-//        }
+        if (count==0) {
+            [oneCommentString addAttribute:NSForegroundColorAttributeName value:firstComment range:commentRange];
+        }
         [commentString appendAttributedString:oneCommentString];
-//        count++;
+        count++;
     }
     
     return commentString;
