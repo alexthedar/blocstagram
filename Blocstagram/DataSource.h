@@ -14,6 +14,7 @@ typedef void (^NewItemCompletionBlock)(NSError *error);
 + (NSString *) instagramClientID;
 @property (nonatomic, strong, readonly) NSArray *mediaItems;
 @property (nonatomic, assign) BOOL isRefreshing;
+@property (nonatomic, strong, readonly) NSString *accessToken;
 - (void) deleteMediaItem:(Media *)item;
 - (void) requestNewItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
 - (void) requestOldItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
