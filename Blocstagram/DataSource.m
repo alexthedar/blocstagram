@@ -28,6 +28,9 @@
     });
     return sharedInstance;
 }
++ (NSString *) instagramClientID {
+    return @"e3a7b34bb12f4e299e2ca0890232809d";
+}
 
 - (instancetype) init {
     self = [super init];
@@ -163,6 +166,8 @@
         }
     }
 }
+
+
 - (void) requestOldItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler {
     if (self.isLoadingOlderItems == NO) {
         self.isLoadingOlderItems = YES;
