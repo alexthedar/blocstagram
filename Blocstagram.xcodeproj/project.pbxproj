@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		761F15291D09B0E400BA38A4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 761F15281D09B0E400BA38A4 /* LoginViewController.m */; };
 		76B19E181CFF2A950033AC62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E171CFF2A950033AC62 /* main.m */; };
 		76B19E1B1CFF2A950033AC62 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E1A1CFF2A950033AC62 /* AppDelegate.m */; };
 		76B19E231CFF2A950033AC62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76B19E221CFF2A950033AC62 /* Assets.xcassets */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		761F15271D09B0E400BA38A4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		761F15281D09B0E400BA38A4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		76B19E131CFF2A950033AC62 /* Blocstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76B19E171CFF2A950033AC62 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		76B19E191CFF2A950033AC62 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 				76B19E5A1CFFED0E0033AC62 /* Comment.m */,
 				76B19E5C1CFFED480033AC62 /* DataSource.h */,
 				76B19E5D1CFFED480033AC62 /* DataSource.m */,
+				761F15271D09B0E400BA38A4 /* LoginViewController.h */,
+				761F15281D09B0E400BA38A4 /* LoginViewController.m */,
 				76B19E531CFFEC600033AC62 /* User.h */,
 				76B19E541CFFEC600033AC62 /* User.m */,
 				76B19E221CFF2A950033AC62 /* Assets.xcassets */,
@@ -285,6 +290,7 @@
 				76B19E611D0075D50033AC62 /* MediaTableViewCell.m in Sources */,
 				76B19E581CFFECB00033AC62 /* Media.m in Sources */,
 				76B19E1B1CFF2A950033AC62 /* AppDelegate.m in Sources */,
+				761F15291D09B0E400BA38A4 /* LoginViewController.m in Sources */,
 				76B19E5E1CFFED480033AC62 /* DataSource.m in Sources */,
 				76B19E181CFF2A950033AC62 /* main.m in Sources */,
 				76B19E521CFF2CC10033AC62 /* ImagesTableViewController.m in Sources */,
