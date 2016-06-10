@@ -12,4 +12,7 @@
  +(instancetype) sharedInstance;
 @property (nonatomic, strong, readonly) NSArray *mediaItems;
 - (void) deleteMediaItem:(Media *)item;
+//- (void) insertObject:(Media *)object inMediaItemsAtIndex:(NSUInteger)index {
+
+- (void) insertObject:(Media *)item inMediaItemsAtIndex:(NSUInteger)index;
 @end

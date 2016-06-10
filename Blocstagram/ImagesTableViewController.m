@@ -93,6 +93,7 @@
         // Delete the row from the data source
         Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
         [[DataSource sharedInstance] deleteMediaItem:item];
+        [[DataSource sharedInstance] insertObject:item inMediaItemsAtIndex:0];
     }
 }
 
