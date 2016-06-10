@@ -14,8 +14,14 @@ typedef void (^NewItemCompletionBlock)(NSError *error);
 @property (nonatomic, strong, readonly) NSArray *mediaItems;
 @property (nonatomic, assign) BOOL isRefreshing;
 - (void) deleteMediaItem:(Media *)item;
+<<<<<<< HEAD
 - (void) requestNewItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
 - (void) requestOldItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
 
+=======
+//- (void) insertObject:(Media *)object inMediaItemsAtIndex:(NSUInteger)index {
+
+- (void) insertObject:(Media *)item inMediaItemsAtIndex:(NSUInteger)index;
+>>>>>>> assignment-31
 @end
 
