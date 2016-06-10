@@ -16,8 +16,14 @@ typedef void (^NewItemCompletionBlock)(NSError *error);
 @property (nonatomic, assign) BOOL isRefreshing;
 @property (nonatomic, strong, readonly) NSString *accessToken;
 - (void) deleteMediaItem:(Media *)item;
+<<<<<<< HEAD
 - (void) requestNewItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
 - (void) requestOldItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
 
+=======
+//- (void) insertObject:(Media *)object inMediaItemsAtIndex:(NSUInteger)index {
+
+- (void) insertObject:(Media *)item inMediaItemsAtIndex:(NSUInteger)index;
+>>>>>>> assignment-31
 @end
 
