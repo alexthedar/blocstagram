@@ -10,8 +10,8 @@
 
 @class User;
 
-@interface Media : NSObject
 
+@interface Media : NSObject <NSCoding>
 @property (nonatomic, strong) NSString *idNumber;
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSURL *mediaURL;
