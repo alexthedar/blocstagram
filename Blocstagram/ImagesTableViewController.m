@@ -42,18 +42,10 @@
     
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
 
-        UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style: UIBarButtonItemStylePlain target:self action:@selector(Share:)];
-        self.navigationItem.rightBarButtonItem = shareButton;
-    
-    
-}
 
--(IBAction)Share:(id)sender{
-    NSArray* sharedObjects=[NSArray arrayWithObjects:@"sharecontent",  nil];
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
-                                                        initWithActivityItems:sharedObjects applicationActivities:nil];
-    activityViewController.popoverPresentationController.sourceView = self.view;
-    [self presentViewController:activityViewController animated:YES completion:nil];
+    
+    
+
 }
 - (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
