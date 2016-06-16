@@ -139,6 +139,12 @@
         [self presentViewController:activityVC animated:YES completion:nil];
     }
 }
+-(void) cell:(MediaTableViewCell *)cell didDoubleTouchView:(UIImageView *)imageView {
+    
+    [[DataSource sharedInstance] downloadImageForMediaItem:cell.mediaItem];
+    //NSLog(@"fired");
+
+    }
 
 
 #pragma mark - Table view data source

@@ -19,8 +19,10 @@
 @property (nonatomic, strong) NSLayoutConstraint *imageHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *usernameAndCaptionLabelHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *commentLabelHeightConstraint;
- @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *twoFingerTouch;
+@property(nonatomic) NSUInteger numberOfTouchesRequired;
 @end
 
 static UIFont *lightFont;
@@ -45,6 +47,10 @@ static NSParagraphStyle *paragraphStyle;
         [self.delegate cell:self didLongPressImageView:self.mediaImageView];
     }
 }
+-(void)doubleFingerTouch:(UITapGestureRecognizer *)sender{
+    [self.delegate cell:self didDoubleTouchView:self.mediaImageView];
+}
+
 
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -146,6 +152,8 @@ static NSParagraphStyle *paragraphStyle;
     self.commentLabel.attributedText = [self commentString];
 }
 
+
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -156,6 +164,13 @@ static NSParagraphStyle *paragraphStyle;
         
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
         self.tapGestureRecognizer.delegate = self;
+        
+        self.twoFingerTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleFingerTouch:)];
+        self.twoFingerTouch.numberOfTouchesRequired = 2;
+        self.twoFingerTouch.delegate =self;
+        [self.mediaImageView addGestureRecognizer:self.twoFingerTouch];
+        
+        
         [self.mediaImageView addGestureRecognizer:self.tapGestureRecognizer];
         self.longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressFired:)];
         self.longPressGestureRecognizer.delegate = self;

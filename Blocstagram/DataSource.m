@@ -228,6 +228,7 @@
 }
 
 - (void) downloadImageForMediaItem:(Media *)mediaItem {
+    NSLog(@"fired download");
     if (mediaItem.mediaURL && !mediaItem.image) {
         [self.instagramOperationManager GET:mediaItem.mediaURL.absoluteString
                                  parameters:nil
