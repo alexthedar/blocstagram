@@ -160,12 +160,19 @@
     
     return cell;
 }
-//- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    Media *mediaItem = [DataSource sharedInstance].mediaItems[indexPath.row];
-//    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
-//        [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(tableView.decelerating){
+            Media *mediaItem = [DataSource sharedInstance].mediaItems[indexPath.row];
+            if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+                [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+            }
+    }
+//    if (!tableView.decelerating) {
+//        NSString *url = ...;
+//        [cell showImageURL:url];
 //    }
-//}
+
+}
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
@@ -174,7 +181,7 @@
     return [MediaTableViewCell heightForMediaItem:item width:CGRectGetWidth(self.view.frame)];
 }
 - (void) infiniteScrollIfNecessary {
-
+    
     NSIndexPath *bottomIndexPath = [[self.tableView indexPathsForVisibleRows] lastObject];
     
     if (bottomIndexPath && bottomIndexPath.row == [DataSource sharedInstance].mediaItems.count - 1) {
@@ -186,11 +193,19 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    [[DataSource sharedInstance] downloadImageForMediaItem:]
+
+//    NSArray *visibleCells = [self.tableView visibleCells];
+//    [visibleCells enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        MyTableViewCell *cell = (MyTableViewCell *)obj;
+//        NSString *url = ...;
+//        [cell showImageURL:url];
+//    }];
     
-    Media *mediaItem = [DataSource sharedInstance].mediaItems[indexPath.row];
-    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
-        [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
-    }
+//    Media *mediaItem = [DataSource sharedInstance].mediaItems[indexPath.row];
+//    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+//        [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+//    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
