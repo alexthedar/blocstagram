@@ -142,9 +142,11 @@
         
         NSRange rangeOfIndexes = NSMakeRange(0, tmpMediaItems.count);
         NSIndexSet *indexSetOfNewObjects = [NSIndexSet indexSetWithIndexesInRange:rangeOfIndexes];
-        
+
+//        [self willChangeValueForKey:@"mediaItems"];
         [mutableArrayWithKVO insertObjects:tmpMediaItems atIndexes:indexSetOfNewObjects];
-        
+//        [self didChangeValueForKey:@"mediaItems"];
+
     } else if (parameters[@"max_id"]) {
         // This was an infinite scroll request
         
@@ -198,6 +200,7 @@
         
         [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
             self.isRefreshing = NO;
+            
             
             if (completionHandler) {
                 completionHandler(error);

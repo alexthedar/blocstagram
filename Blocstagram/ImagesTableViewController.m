@@ -15,7 +15,8 @@
 #import "MediaFullScreenViewController.h"
 
 @interface ImagesTableViewController () <MediaTableViewCellDelegate>
-
+@property(nonatomic, readonly, getter=isDragging) BOOL dragging;
+@property(nonatomic, readonly, getter=isDecelerating) BOOL decelerating;
 @end
 
 @implementation ImagesTableViewController
@@ -58,6 +59,7 @@
 - (void) refreshControlDidFire:(UIRefreshControl *) sender {
     [[DataSource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
         [sender endRefreshing];
+        [self.tableView reloadData];
     }];
 }
 - (void) dealloc
@@ -167,10 +169,6 @@
                 [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
             }
     }
-//    if (!tableView.decelerating) {
-//        NSString *url = ...;
-//        [cell showImageURL:url];
-//    }
 
 }
 
@@ -193,7 +191,14 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    [[DataSource sharedInstance] downloadImageForMediaItem:]
+    
+    NSLog(@"jjj");
+    for (NSIndexPath *currentIndexPath in [self.tableView indexPathsForVisibleRows]) {
+        Media *mediaItem = [DataSource sharedInstance].mediaItems[currentIndexPath.row];
+        if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+            [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+        }
+    }
 
 //    NSArray *visibleCells = [self.tableView visibleCells];
 //    [visibleCells enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
