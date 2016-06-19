@@ -14,11 +14,12 @@
 
 - (void) cell:(MediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView;
 - (void) cell:(MediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView;
-
+- (void) cellDidPressLikeButton:(MediaTableViewCell *)cell;
 @end
 @interface MediaTableViewCell : UITableViewCell
 @property (nonatomic, weak) id <MediaTableViewCellDelegate> delegate;
 @property (nonatomic, strong) Media *mediaItem;
+
 
 + (CGFloat) heightForMediaItem:(Media *)mediaItem width:(CGFloat)width;
 

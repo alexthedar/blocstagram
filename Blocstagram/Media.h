@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LikeButton.h"
 typedef NS_ENUM(NSInteger, MediaDownloadState) {
     MediaDownloadStateNeedsImage             = 0,
     MediaDownloadStateDownloadInProgress     = 1,
@@ -18,6 +19,7 @@ typedef NS_ENUM(NSInteger, MediaDownloadState) {
 
 
 @interface Media : NSObject <NSCoding>
+@property (nonatomic, assign) LikeState likeState;
 @property (nonatomic, strong) NSString *idNumber;
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSURL *mediaURL;
