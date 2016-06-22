@@ -32,6 +32,7 @@
 		76B19E5B1CFFED0E0033AC62 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E5A1CFFED0E0033AC62 /* Comment.m */; };
 		76B19E5E1CFFED480033AC62 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E5D1CFFED480033AC62 /* DataSource.m */; };
 		76B19E611D0075D50033AC62 /* MediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E601D0075D50033AC62 /* MediaTableViewCell.m */; };
+		76BB50D41D183152001057C8 /* ComposeCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BB50D31D183152001057C8 /* ComposeCommentView.m */; };
 		F5EB3576BB3E10EFADACDA47 /* libPods-Blocstagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 790512C1A3632508CE51AE79 /* libPods-Blocstagram.a */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,8 @@
 		76B19E5D1CFFED480033AC62 /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
 		76B19E5F1D0075D50033AC62 /* MediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaTableViewCell.h; path = ../MediaTableViewCell.h; sourceTree = "<group>"; };
 		76B19E601D0075D50033AC62 /* MediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaTableViewCell.m; path = ../MediaTableViewCell.m; sourceTree = "<group>"; };
+		76BB50D21D183152001057C8 /* ComposeCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeCommentView.h; sourceTree = "<group>"; };
+		76BB50D31D183152001057C8 /* ComposeCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeCommentView.m; sourceTree = "<group>"; };
 		790512C1A3632508CE51AE79 /* libPods-Blocstagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Blocstagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -145,6 +148,8 @@
 				76B19E3B1CFF2C150033AC62 /* images */,
 				76B19E5F1D0075D50033AC62 /* MediaTableViewCell.h */,
 				76B19E601D0075D50033AC62 /* MediaTableViewCell.m */,
+				76BB50D21D183152001057C8 /* ComposeCommentView.h */,
+				76BB50D31D183152001057C8 /* ComposeCommentView.m */,
 				768878DB1D0EF800007E581C /* MediaFullScreenViewController.h */,
 				768878DC1D0EF800007E581C /* MediaFullScreenViewController.m */,
 				76B19E191CFF2A950033AC62 /* AppDelegate.h */,
@@ -385,6 +390,7 @@
 				761F15291D09B0E400BA38A4 /* LoginViewController.m in Sources */,
 				768878E31D173FD3007E581C /* LikeButton.m in Sources */,
 				76B19E5E1CFFED480033AC62 /* DataSource.m in Sources */,
+				76BB50D41D183152001057C8 /* ComposeCommentView.m in Sources */,
 				76B19E181CFF2A950033AC62 /* main.m in Sources */,
 				76B19E521CFF2CC10033AC62 /* ImagesTableViewController.m in Sources */,
 			);

@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, MediaDownloadState) {
 
 
 @interface Media : NSObject <NSCoding>
+@property (nonatomic, strong) NSString *temporaryComment;
 @property (nonatomic, assign) LikeState likeState;
 @property (nonatomic, strong) NSString *idNumber;
 @property (nonatomic, strong) User *user;
