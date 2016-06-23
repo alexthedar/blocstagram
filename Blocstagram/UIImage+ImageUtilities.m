@@ -142,7 +142,7 @@
     image = [image imageResizedToMatchAspectRatioOfSize:size];
     image = [image imageCroppedToRect:rect];
     return image;
-    
+    //
 }
 
 @end
