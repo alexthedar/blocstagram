@@ -315,7 +315,9 @@
         
         [self.instagramOperationManager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             mediaItem.likeState = LikeStateLiked;
-            
+            NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+            NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem.likes];
+            [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem.likes];
             if (completionHandler) {
                 completionHandler();
             }
@@ -345,6 +347,10 @@
             }
         }];
     }
+    
+
+//    [self saveImages];
+    
 }
 
 @end

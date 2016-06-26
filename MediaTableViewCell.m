@@ -189,7 +189,7 @@ static NSParagraphStyle *paragraphStyle;
         
         self.likeLabel = [[UILabel alloc]init];
         self.likeLabel.numberOfLines = 0;
-        self.likeLabel.backgroundColor = usernameLabelGray;
+        self.likeLabel.backgroundColor = commentLabelGray;
         
         self.likeButton = [[LikeButton alloc] init];
         [self.likeButton addTarget:self action:@selector(likePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -260,6 +260,8 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) likePressed:(UIButton *)sender {
     [self.delegate cellDidPressLikeButton:self];
+    
+    //refresh
 
 }
 

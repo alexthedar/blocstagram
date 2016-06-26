@@ -169,7 +169,15 @@
     }];
     
     cell.mediaItem = item;
-}
+//    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+
+
+//    [self.tableView beginUpdates];
+//    
+//    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    [self.tableView endUpdates];
+
+  }
 
 #pragma mark - UIScrollViewDelegate
 
