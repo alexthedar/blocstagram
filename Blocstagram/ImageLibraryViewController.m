@@ -8,10 +8,13 @@
 
 #import "ImageLibraryViewController.h"
 #import <Photos/Photos.h>
+#import "Cropbox.h"
 #import "CropImageViewController.h"
 
 @interface ImageLibraryViewController () <CropImageViewControllerDelegate>
-
+//@property (nonatomic, strong) CropBox *cropBox;
+@property (nonatomic, strong) UIToolbar *topView;
+@property (nonatomic, strong) UIToolbar *bottomView;
 @property (nonatomic, strong) PHFetchResult *result;
 @end
 @implementation ImageLibraryViewController
@@ -21,15 +24,40 @@
     
     return [super initWithCollectionViewLayout:layout];
 }
-- (void)viewDidLoad
-{
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
+    [self createViews];
+    [self addViewsToViewHierarchy];
+
+    [self createCancelButton];
+}
+- (void) createViews {
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
     self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.topView = [UIToolbar new];
+    self.bottomView = [UIToolbar new];
+//    self.cropBox = [CropBox new];
+
+    UIColor *whiteBG = [UIColor colorWithWhite:1.0 alpha:.15];
+    self.topView.barTintColor = whiteBG;
+    self.bottomView.barTintColor = whiteBG;
+    self.topView.alpha = 0.5;
+    self.bottomView.alpha = 0.5;
+}
+- (void) addViewsToViewHierarchy {
     
+    NSMutableArray *views = [@[self.collectionView, self.topView, self.bottomView] mutableCopy];
+    
+    
+    for (UIView *view in views) {
+        [self.view addSubview:view];
+    }
+}
+- (void) createCancelButton {
     UIImage *cancelImage = [UIImage imageNamed:@"x"];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:cancelImage style:UIBarButtonItemStyleDone target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -38,18 +66,41 @@
 - (void) cancelPressed:(UIBarButtonItem *)sender {
     [self.delegate imageLibraryViewController:self didCompleteWithImage:nil];
 }
-- (void) viewWillLayoutSubviews {
+//- (void) viewWillLayoutSubviews {
+//    [super viewWillLayoutSubviews];
+//    
+//    CGFloat width = CGRectGetWidth(self.view.frame);
+//    CGFloat minWidth = 100;
+//    NSInteger divisor = width / minWidth;
+//    CGFloat cellSize = width / divisor;
+//    
+//    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
+//    flowLayout.itemSize = CGSizeMake(cellSize, cellSize);
+//    flowLayout.minimumInteritemSpacing = 0;
+//    flowLayout.minimumLineSpacing = 0;
+//}
+- (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
     CGFloat width = CGRectGetWidth(self.view.frame);
     CGFloat minWidth = 100;
     NSInteger divisor = width / minWidth;
     CGFloat cellSize = width / divisor;
+    self.topView.frame = CGRectMake(0, self.topLayoutGuide.length, width, 44);
     
+    CGFloat yOriginOfBottomView = CGRectGetMaxY(self.topView.frame) + width;
+    CGFloat heightOfBottomView = CGRectGetHeight(self.view.frame) - yOriginOfBottomView;
+    self.bottomView.frame = CGRectMake(0, yOriginOfBottomView, width, heightOfBottomView);
+//    CGRect newCollectionViewFrame = CGRectMake(self.collectionView.frame.origin.x, 45, self.collectionView.frame.size.width,  400);
+    CGRect newCollectionViewFrame = CGRectMake(self.collectionView.frame.origin.x, 45, self.collectionView.frame.size.width,  400);
+    self.collectionView.frame = newCollectionViewFrame;
+
+
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     flowLayout.itemSize = CGSizeMake(cellSize, cellSize);
-    flowLayout.minimumInteritemSpacing = 0;
-    flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumInteritemSpacing = 0;
+//        flowLayout.minimumLineSpacing = 0;
+
 }
 - (void) loadAssets {
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
