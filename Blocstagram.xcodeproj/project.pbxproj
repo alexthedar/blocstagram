@@ -40,6 +40,7 @@
 		76B19E5E1CFFED480033AC62 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E5D1CFFED480033AC62 /* DataSource.m */; };
 		76B19E611D0075D50033AC62 /* MediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E601D0075D50033AC62 /* MediaTableViewCell.m */; };
 		76BB50D41D183152001057C8 /* ComposeCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BB50D31D183152001057C8 /* ComposeCommentView.m */; };
+		76D6F6A21D21714300BCDA3E /* FilterCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D6F6A11D21714300BCDA3E /* FilterCollectionViewCell.m */; };
 		F5EB3576BB3E10EFADACDA47 /* libPods-Blocstagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 790512C1A3632508CE51AE79 /* libPods-Blocstagram.a */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,8 @@
 		76B19E601D0075D50033AC62 /* MediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaTableViewCell.m; path = ../MediaTableViewCell.m; sourceTree = "<group>"; };
 		76BB50D21D183152001057C8 /* ComposeCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeCommentView.h; sourceTree = "<group>"; };
 		76BB50D31D183152001057C8 /* ComposeCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeCommentView.m; sourceTree = "<group>"; };
+		76D6F6A01D21714300BCDA3E /* FilterCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterCollectionViewCell.h; sourceTree = "<group>"; };
+		76D6F6A11D21714300BCDA3E /* FilterCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterCollectionViewCell.m; sourceTree = "<group>"; };
 		790512C1A3632508CE51AE79 /* libPods-Blocstagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Blocstagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -167,14 +170,10 @@
 			isa = PBXGroup;
 			children = (
 				76B19E3B1CFF2C150033AC62 /* images */,
-				76B19E5F1D0075D50033AC62 /* MediaTableViewCell.h */,
-				76B19E601D0075D50033AC62 /* MediaTableViewCell.m */,
-				76BB50D21D183152001057C8 /* ComposeCommentView.h */,
 				763904B11D1C2EE4006E0D59 /* CropBox.h */,
 				763904B21D1C2EE4006E0D59 /* CropBox.m */,
+				76BB50D21D183152001057C8 /* ComposeCommentView.h */,
 				76BB50D31D183152001057C8 /* ComposeCommentView.m */,
-				7672CC9D1D1D6628005C58F1 /* PostToInstagramViewController.h */,
-				7672CC9E1D1D6628005C58F1 /* PostToInstagramViewController.m */,
 				768878DB1D0EF800007E581C /* MediaFullScreenViewController.h */,
 				768878DC1D0EF800007E581C /* MediaFullScreenViewController.m */,
 				763904B41D1C3078006E0D59 /* CropImageViewController.h */,
@@ -185,6 +184,12 @@
 				76B19E1A1CFF2A950033AC62 /* AppDelegate.m */,
 				76B19E501CFF2CC10033AC62 /* ImagesTableViewController.h */,
 				76B19E511CFF2CC10033AC62 /* ImagesTableViewController.m */,
+				7672CC9D1D1D6628005C58F1 /* PostToInstagramViewController.h */,
+				7672CC9E1D1D6628005C58F1 /* PostToInstagramViewController.m */,
+				76B19E5F1D0075D50033AC62 /* MediaTableViewCell.h */,
+				76B19E601D0075D50033AC62 /* MediaTableViewCell.m */,
+				76D6F6A01D21714300BCDA3E /* FilterCollectionViewCell.h */,
+				76D6F6A11D21714300BCDA3E /* FilterCollectionViewCell.m */,
 				76B19E561CFFECB00033AC62 /* Media.h */,
 				76B19E571CFFECB00033AC62 /* Media.m */,
 				76B19E591CFFED0E0033AC62 /* Comment.h */,
@@ -418,6 +423,7 @@
 				7643766B1D1AD726008A8B50 /* CameraViewController.m in Sources */,
 				768878DD1D0EF800007E581C /* MediaFullScreenViewController.m in Sources */,
 				768878E01D173D31007E581C /* CircleSpinnerView.m in Sources */,
+				76D6F6A21D21714300BCDA3E /* FilterCollectionViewCell.m in Sources */,
 				76B19E551CFFEC610033AC62 /* User.m in Sources */,
 				763904B91D1C315F006E0D59 /* ImageLibraryViewController.m in Sources */,
 				763904B31D1C2EE4006E0D59 /* CropBox.m in Sources */,
