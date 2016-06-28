@@ -187,6 +187,17 @@
 - (void) addFiltersToQueue {
     CIImage *sourceCIImage = [CIImage imageWithCGImage:self.sourceImage.CGImage];
     
+    // Posterize filter
+    
+    [self.photoFilterOperationQueue addOperationWithBlock:^{
+        CIFilter *posterizeFilter = [CIFilter filterWithName:@"CIColorPosterize"];
+        
+        if (posterizeFilter) {
+            [posterizeFilter setValue:sourceCIImage forKey:kCIInputImageKey];
+            [self addCIImageToCollectionView:posterizeFilter.outputImage withFilterTitle:NSLocalizedString(@"Posterize", @"Posterize Filter")];
+        }
+    }];
+    
     // Noir filter
     
     [self.photoFilterOperationQueue addOperationWithBlock:^{
@@ -197,6 +208,25 @@
             [self addCIImageToCollectionView:noirFilter.outputImage withFilterTitle:NSLocalizedString(@"Noir", @"Noir Filter")];
         }
     }];
+    
+    // New Compound filter
+    
+    [self.photoFilterOperationQueue addOperationWithBlock:^{
+        CIFilter *motionBlur = [CIFilter filterWithName:@"CIMotionBlur"];
+        CIFilter *photoEffectTransfer = [CIFilter filterWithName:@"CIPhotoEffectTransfer"];
+        
+        if (motionBlur) {
+            [motionBlur setValue:sourceCIImage forKey:kCIInputImageKey];
+            CIImage *result = motionBlur.outputImage;
+            if(photoEffectTransfer) {
+                [photoEffectTransfer setValue:sourceCIImage forKey:kCIInputImageKey];
+                result = photoEffectTransfer.outputImage;
+            }
+            [self addCIImageToCollectionView:result withFilterTitle:NSLocalizedString(@"Hipster Motion", @"Hipster Motion Filter")];
+        }
+    }];
+    
+    
     // Drunk filter
     
     [self.photoFilterOperationQueue addOperationWithBlock:^{
