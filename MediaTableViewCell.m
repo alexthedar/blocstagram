@@ -11,22 +11,25 @@
 #import "Comment.h"
 #import "User.h"
 #import "LikeButton.h"
- #import "ComposeCommentView.h"
+#import "ComposeCommentView.h"
+
+
 
 @interface MediaTableViewCell () <UIGestureRecognizerDelegate, ComposeCommentViewDelegate>
-@property (nonatomic, strong) LikeButton *likeButton;
+
 @property (nonatomic, strong) UIImageView *mediaImageView;
 @property (nonatomic, strong) UILabel *usernameAndCaptionLabel;
 @property (nonatomic, strong) UILabel *commentLabel;
 @property (nonatomic, strong) NSLayoutConstraint *imageHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *usernameAndCaptionLabelHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *commentLabelHeightConstraint;
- @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property (nonatomic, strong) LikeButton *likeButton;
 @property (nonatomic, strong) ComposeCommentView *commentView;
 @property (nonatomic, strong) NSArray *horizontallyRegularConstraints;
 @property (nonatomic, strong) NSArray *horizontallyCompactConstraints;
-@property (nonatomic, strong) UITraitCollection *overrideTraitCollection;
+
 
 @end
 
@@ -39,25 +42,13 @@ static NSParagraphStyle *paragraphStyle;
 
 @implementation MediaTableViewCell
 
-
-
-#pragma mark - Image View
-
-- (void) tapFired:(UITapGestureRecognizer *)sender {
-    [self.delegate cell:self didTapImageView:self.mediaImageView];
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:NO animated:animated];
     
 }
-- (void) longPressFired:(UILongPressGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        [self.delegate cell:self didLongPressImageView:self.mediaImageView];
-    }
-}
 
-
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    return self.isEditing == NO;
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:NO animated:animated];
 }
 
 + (void)load {
@@ -74,114 +65,6 @@ static NSParagraphStyle *paragraphStyle;
     mutableParagraphStyle.paragraphSpacingBefore = 5;
     
     paragraphStyle = mutableParagraphStyle;
-}
-
-- (NSAttributedString *) usernameAndCaptionString {
-    CGFloat usernameFontSize = 15;
-    NSString *baseString = [NSString stringWithFormat:@"%@ %@", self.mediaItem.user.userName, self.mediaItem.caption];
-    NSMutableAttributedString *mutableUsernameAndCaptionString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : [lightFont fontWithSize:usernameFontSize], NSParagraphStyleAttributeName : paragraphStyle}];
-    NSRange usernameRange = [baseString rangeOfString:self.mediaItem.user.userName];
-    [mutableUsernameAndCaptionString addAttribute:NSFontAttributeName value:[boldFont fontWithSize:usernameFontSize]  range:usernameRange];
-    [mutableUsernameAndCaptionString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
-    return mutableUsernameAndCaptionString;
-}
-
-- (NSAttributedString *) commentString {
-    NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] init];
-    
-    for (Comment *comment in self.mediaItem.comments) {
-
-        NSString *baseString = [NSString stringWithFormat:@"%@ %@\n", comment.from.userName, comment.text];
-
-        
-        NSMutableAttributedString *oneCommentString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : lightFont, NSParagraphStyleAttributeName : paragraphStyle}];
-        
-        NSRange usernameRange = [baseString rangeOfString:comment.from.userName];
-        [oneCommentString addAttribute:NSFontAttributeName value:boldFont range:usernameRange];
-        [oneCommentString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
-        
-        [commentString appendAttributedString:oneCommentString];
-    }
-    
-    return commentString;
-}
-+ (CGFloat) heightForMediaItem:(Media *)mediaItem width:(CGFloat)width traitCollection:(UITraitCollection *) traitCollection {
-
-
-    MediaTableViewCell *layoutCell = [[MediaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"layoutCell"];
-
-
-    layoutCell.mediaItem = mediaItem;
-
-    layoutCell.frame = CGRectMake(0, 0, width, CGRectGetHeight(layoutCell.frame));
-    layoutCell.overrideTraitCollection = traitCollection;
-    [layoutCell setNeedsLayout];
-    [layoutCell layoutIfNeeded];
-
-    return CGRectGetMaxY(layoutCell.commentView.frame);
-}
-
-- (UITraitCollection *) traitCollection {
-    if (self.overrideTraitCollection) {
-        return self.overrideTraitCollection;
-    }
-    
-    return [super traitCollection];
-}
-
-- (void) layoutSubviews {
-    [super layoutSubviews];
-    
-    if (!self.mediaItem) {
-        return;
-    }
-    CGSize maxSize = CGSizeMake(CGRectGetWidth(self.bounds), CGFLOAT_MAX);
-    CGSize usernameLabelSize = [self.usernameAndCaptionLabel sizeThatFits:maxSize];
-    CGSize commentLabelSize = [self.commentLabel sizeThatFits:maxSize];
-    
-    self.usernameAndCaptionLabelHeightConstraint.constant = usernameLabelSize.height == 0 ? 0 : usernameLabelSize.height + 20;
-
-    self.commentLabelHeightConstraint.constant = commentLabelSize.height == 0 ? 0 : commentLabelSize.height + 20;
-    
-    if (self.mediaItem.image.size.width > 0 && CGRectGetWidth(self.contentView.bounds) > 0) {
-        
-        if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            /* It's compact! */
-            self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
-        } else if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
-            /* It's regular! */
-            self.imageHeightConstraint.constant = 320;
-        }
-    } else {
-        self.imageHeightConstraint.constant = 0;
-    }
-    // Hide the line between cells
-    self.separatorInset = UIEdgeInsetsMake(0, CGRectGetWidth(self.bounds)/2.0, 0, CGRectGetWidth(self.bounds)/2.0);
-    
-    
-}
-
-- (void) traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        /* It's compact! */
-        [self.contentView removeConstraints:self.horizontallyRegularConstraints];
-        [self.contentView addConstraints:self.horizontallyCompactConstraints];
-    } else if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
-        /* It's regular */
-        [self.contentView removeConstraints:self.horizontallyCompactConstraints];
-        [self.contentView addConstraints:self.horizontallyRegularConstraints];
-    }
-}
-
-
-- (void) setMediaItem:(Media *)mediaItem {
-    _mediaItem = mediaItem;
-    self.mediaImageView.image = _mediaItem.image;
-    self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
-    self.commentLabel.attributedText = [self commentString];
-    self.likeButton.likeButtonState = mediaItem.likeState;
-    self.commentView.text = mediaItem.temporaryComment;
-
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -212,6 +95,7 @@ static NSParagraphStyle *paragraphStyle;
         self.likeButton = [[LikeButton alloc] init];
         [self.likeButton addTarget:self action:@selector(likePressed:) forControlEvents:UIControlEventTouchUpInside];
         self.likeButton.backgroundColor = usernameLabelGray;
+        
         self.commentView = [[ComposeCommentView alloc] init];
         self.commentView.delegate = self;
         
@@ -243,10 +127,11 @@ static NSParagraphStyle *paragraphStyle;
             /* It's regular! */
             [self.contentView addConstraints:self.horizontallyRegularConstraints];
         }
-
+        
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentView]|" options:kNilOptions metrics:nil views:viewDictionary]];
+        
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel][_commentView(==100)]"
                                                                                  options:kNilOptions
@@ -284,22 +169,146 @@ static NSParagraphStyle *paragraphStyle;
     }
     return self;
 }
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:NO animated:animated];
+
+- (NSAttributedString *) usernameAndCaptionString {
+    // #1
+    CGFloat usernameFontSize = 15;
+    
+    // #2 - Make a string that says "username caption"
+    NSString *baseString = [NSString stringWithFormat:@"%@ %@", self.mediaItem.user.userName, self.mediaItem.caption];
+    
+    // #3 - Make an attributed string, with the "username" bold
+    NSMutableAttributedString *mutableUsernameAndCaptionString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : [lightFont fontWithSize:usernameFontSize], NSParagraphStyleAttributeName : paragraphStyle}];
+    
+    // #4
+    NSRange usernameRange = [baseString rangeOfString:self.mediaItem.user.userName];
+    [mutableUsernameAndCaptionString addAttribute:NSFontAttributeName value:[boldFont fontWithSize:usernameFontSize] range:usernameRange];
+    [mutableUsernameAndCaptionString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
+    
+    return mutableUsernameAndCaptionString;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (NSAttributedString *) commentString {
+    NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] init];
     
-    [super setSelected:NO animated:animated];
+    for (Comment *comment in self.mediaItem.comments) {
+        // Make a string that says "username comment" followed by a line break
+        NSString *baseString = [NSString stringWithFormat:@"%@ %@\n", comment.from.userName, comment.text];
+        
+        // Make an attributed string, with the "username" bold
+        
+        NSMutableAttributedString *oneCommentString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : lightFont, NSParagraphStyleAttributeName : paragraphStyle}];
+        
+        NSRange usernameRange = [baseString rangeOfString:comment.from.userName];
+        [oneCommentString addAttribute:NSFontAttributeName value:boldFont range:usernameRange];
+        [oneCommentString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
+        
+        [commentString appendAttributedString:oneCommentString];
+    }
     
-    // Configure the view for the selected state
+    return commentString;
 }
+
+
+- (void) layoutSubviews {
+    [super layoutSubviews];
+    
+    if (!self.mediaItem) {
+        return;
+    }
+    // Before layout, calculate the intrinsic size of the labels (the size they "want" to be), and add 20 to the height for some vertical padding.
+    CGSize maxSize = CGSizeMake(CGRectGetWidth(self.bounds), CGFLOAT_MAX);
+    CGSize usernameLabelSize = [self.usernameAndCaptionLabel sizeThatFits:maxSize];
+    CGSize commentLabelSize = [self.commentLabel sizeThatFits:maxSize];
+    
+    self.usernameAndCaptionLabelHeightConstraint.constant = usernameLabelSize.height == 0 ? 0 : usernameLabelSize.height + 20;
+    self.commentLabelHeightConstraint.constant = commentLabelSize.height == 0 ? 0 : commentLabelSize.height + 20;
+    
+    if (self.mediaItem.image.size.width > 0 && CGRectGetWidth(self.contentView.bounds) > 0) {
+        if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+            /* It's compact! */
+            self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+        } else if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+            /* It's regular! */
+            self.imageHeightConstraint.constant = 320;
+        }
+    } else {
+        self.imageHeightConstraint.constant = 0;
+    }
+    // Hide the line between cells
+    self.separatorInset = UIEdgeInsetsMake(0, CGRectGetWidth(self.bounds)/2.0, 0, CGRectGetWidth(self.bounds)/2.0);
+}
+
+- (void) setMediaItem:(Media *)mediaItem {
+    _mediaItem = mediaItem;
+    self.mediaImageView.image = _mediaItem.image;
+    self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
+    self.commentLabel.attributedText = [self commentString];
+    self.likeButton.likeButtonState = mediaItem.likeState;
+    self.commentView.text = mediaItem.temporaryComment;
+    
+    
+}
+
++ (CGFloat) heightForMediaItem:(Media *)mediaItem width:(CGFloat)width traitCollection:(UITraitCollection *) traitCollection {
+    // Make a cell
+    MediaTableViewCell *layoutCell = [[MediaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"layoutCell"];
+    
+    layoutCell.mediaItem = mediaItem;
+    
+    layoutCell.frame = CGRectMake(0, 0, width, CGRectGetHeight(layoutCell.frame));
+    
+    layoutCell.overrideTraitCollection = traitCollection;
+    
+    [layoutCell setNeedsLayout];
+    [layoutCell layoutIfNeeded];
+    
+    return CGRectGetMaxY(layoutCell.commentView.frame);
+    
+}
+
+- (void) traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+        /* It's compact! */
+        [self.contentView removeConstraints:self.horizontallyRegularConstraints];
+        [self.contentView addConstraints:self.horizontallyCompactConstraints];
+    } else if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+        /* It's regular */
+        [self.contentView removeConstraints:self.horizontallyCompactConstraints];
+        [self.contentView addConstraints:self.horizontallyRegularConstraints];
+    }
+}
+- (UITraitCollection *) traitCollection {
+    if (self.overrideTraitCollection) {
+        return self.overrideTraitCollection;
+    }
+    
+    return [super traitCollection];
+}
+#pragma mark - Image View
+
+- (void) tapFired:(UITapGestureRecognizer *)sender {
+    [self.delegate cell:self didTapImageView:self.mediaImageView];
+}
+
+- (void) longPressFired:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self.delegate cell:self didLongPressImageView:self.mediaImageView];
+    }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return self.isEditing == NO;
+}
+
 #pragma mark - Liking
 
 - (void) likePressed:(UIButton *)sender {
     [self.delegate cellDidPressLikeButton:self];
 }
+
 #pragma mark - ComposeCommentViewDelegate
 
 - (void) commentViewDidPressCommentButton:(ComposeCommentView *)sender {
@@ -317,6 +326,7 @@ static NSParagraphStyle *paragraphStyle;
 - (void) stopComposingComment {
     [self.commentView stopComposingComment];
 }
+
 
 
 @end
