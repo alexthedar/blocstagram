@@ -22,6 +22,10 @@
 @property (nonatomic, strong) UIBarButtonItem *sendBarButton;
 
 @property (nonatomic, strong) UIDocumentInteractionController *documentController;
+@property (nonatomic, strong) NSLayoutConstraint *imageHeightConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *filterCollectionHeightConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *sendButtonHeightConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *imageWidthConstraint;
 @end
 @implementation PostToInstagramViewController
 - (void)viewDidLoad
@@ -106,25 +110,72 @@
     }
     
     self.previewImageView.frame = CGRectMake(0, self.topLayoutGuide.length, edgeSize, edgeSize);
+    self.filterCollectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 50);
+
     
-    CGFloat buttonHeight = 50;
-    CGFloat buffer = 10;
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *) self.filterCollectionView.collectionViewLayout;
+    flowLayout.itemSize = CGSizeMake(CGRectGetHeight(self.filterCollectionView.frame) - 20, CGRectGetHeight(self.filterCollectionView.frame));
     
-    CGFloat filterViewYOrigin = CGRectGetMaxY(self.previewImageView.frame) + buffer;
-    CGFloat filterViewHeight;
+    CGFloat maxPreview = self.view.bounds.size.width;
     
-    if (CGRectGetHeight(self.view.frame) > 500) {
-        self.sendButton.frame = CGRectMake(buffer, CGRectGetHeight(self.view.frame) - buffer - buttonHeight, CGRectGetWidth(self.view.frame) - 2 * buffer, buttonHeight);
-        
-        filterViewHeight = CGRectGetHeight(self.view.frame) - filterViewYOrigin - buffer - buffer - CGRectGetHeight(self.sendButton.frame);
+    if (self.previewImageView.bounds.size.width > self.view.bounds.size.width) {
+        self.imageHeightConstraint.constant = CGRectGetHeight(self.view.bounds);
     } else {
-        filterViewHeight = CGRectGetHeight(self.view.frame) - CGRectGetMaxY(self.previewImageView.frame) - buffer - buffer;
+        self.imageHeightConstraint.constant = maxPreview;
+
+    }
+    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings( _previewImageView, _filterCollectionView, _sendButton);
+
+    
+    for (UIView *view  in @[self.previewImageView, self.filterCollectionView, self.sendButton]) {
+        [self.view addSubview:view];
+        view.translatesAutoresizingMaskIntoConstraints = NO;
     }
     
-    self.filterCollectionView.frame = CGRectMake(0, filterViewYOrigin, CGRectGetWidth(self.view.frame), filterViewHeight);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_sendButton]-10-|" options:kNilOptions metrics:nil views:viewDictionary]];
     
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.filterCollectionView.collectionViewLayout;
-    flowLayout.itemSize = CGSizeMake(CGRectGetHeight(self.filterCollectionView.frame) - 20, CGRectGetHeight(self.filterCollectionView.frame));
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[_previewImageView]-10-[_filterCollectionView]-10-[_sendButton]-10-|" options:kNilOptions metrics:nil views:viewDictionary]];
+    
+    self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_previewImageView
+                                                              attribute:NSLayoutAttributeHeight
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:nil
+                                                              attribute:NSLayoutAttributeNotAnAttribute
+                                                             multiplier:1
+                                                               constant:maxPreview];
+    self.imageHeightConstraint.identifier = @"Image height constraint";
+    
+    self.imageWidthConstraint = [NSLayoutConstraint constraintWithItem:_previewImageView
+                                                             attribute:NSLayoutAttributeWidth
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:nil
+                                                             attribute:NSLayoutAttributeNotAnAttribute
+                                                            multiplier:1
+                                                              constant:maxPreview];
+    self.imageWidthConstraint.identifier = @"Image width constraint";
+    
+    
+    self.filterCollectionHeightConstraint = [NSLayoutConstraint constraintWithItem:_filterCollectionView
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:nil
+                                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                                        multiplier:1
+                                                                          constant:CGRectGetHeight(self.filterCollectionView.frame)];
+    self.filterCollectionHeightConstraint.identifier = @"Filter Collection height constraint";
+    
+    self.sendButtonHeightConstraint = [NSLayoutConstraint constraintWithItem:_sendButton
+                                                                   attribute:NSLayoutAttributeHeight
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:nil
+                                                                   attribute:NSLayoutAttributeNotAnAttribute
+                                                                  multiplier:1
+                                                                    constant:50];
+    self.sendButtonHeightConstraint.identifier = @"Send Button height constraint";
+    
+    [self.view addConstraints:@[self.imageHeightConstraint, self.imageWidthConstraint, self.filterCollectionHeightConstraint, self.sendButtonHeightConstraint]];
+    
 }
 
 #pragma mark - UICollectionView delegate and data source
