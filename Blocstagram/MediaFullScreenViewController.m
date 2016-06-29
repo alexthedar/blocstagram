@@ -8,12 +8,14 @@
 
 #import "MediaFullScreenViewController.h"
 #import "Media.h"
+#import "AppDelegate.h"
 
-@interface MediaFullScreenViewController () <UIScrollViewDelegate>
+@interface MediaFullScreenViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
+@property (nonatomic, strong) UITapGestureRecognizer *dismissalTap;
 @end
 
 @implementation MediaFullScreenViewController
@@ -61,12 +63,23 @@
     
 
     self.scrollView.contentSize = self.media.image.size;
+    self.tap.delegate = self;
+    self.tap.cancelsTouchesInView = NO;
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
     
     self.doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapFired:)];
     self.doubleTap.numberOfTapsRequired = 2;
     
     [self.tap requireGestureRecognizerToFail:self.doubleTap];
+    
+    self.dismissalTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissalTapFired:)];
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    UIWindow* window = [appDelegate window];
+    [window addGestureRecognizer:self.dismissalTap];
+    self.dismissalTap.delegate = self;
+    self.dismissalTap.cancelsTouchesInView = NO;
     
     [self.scrollView addGestureRecognizer:self.tap];
     [self.scrollView addGestureRecognizer:self.doubleTap];
@@ -135,7 +148,27 @@
         [self.scrollView setZoomScale:self.scrollView.minimumZoomScale animated:YES];
     }
 }
+- (void) dismissalTapFired:(UITapGestureRecognizer *)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"dismissal TAP FIRED");
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    
+    NSLog(@"%@", gestureRecognizer);
+    NSLog(@"%@", otherGestureRecognizer);
+    
+    return YES;
+}
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+       shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"%@", gestureRecognizer);
+    
+    return YES;
+}
 /*
 #pragma mark - Navigation
 
