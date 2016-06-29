@@ -14,6 +14,7 @@
 		764376681D1AD5A4008A8B50 /* CameraToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 764376671D1AD5A4008A8B50 /* CameraToolbar.m */; };
 		7643766B1D1AD726008A8B50 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7643766A1D1AD726008A8B50 /* CameraViewController.m */; };
 		7643766E1D1AD985008A8B50 /* UIImage+ImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7643766D1D1AD985008A8B50 /* UIImage+ImageUtilities.m */; };
+		765717ED1D2388170035C531 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 765717EC1D2388170035C531 /* UserTests.m */; };
 		7672CC9F1D1D6628005C58F1 /* PostToInstagramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7672CC9E1D1D6628005C58F1 /* PostToInstagramViewController.m */; };
 		768878DD1D0EF800007E581C /* MediaFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768878DC1D0EF800007E581C /* MediaFullScreenViewController.m */; };
 		768878E01D173D31007E581C /* CircleSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 768878DF1D173D31007E581C /* CircleSpinnerView.m */; };
@@ -70,6 +71,7 @@
 		7643766A1D1AD726008A8B50 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraViewController.m; path = ../CameraViewController.m; sourceTree = "<group>"; };
 		7643766C1D1AD985008A8B50 /* UIImage+ImageUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageUtilities.h"; sourceTree = "<group>"; };
 		7643766D1D1AD985008A8B50 /* UIImage+ImageUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageUtilities.m"; sourceTree = "<group>"; };
+		765717EC1D2388170035C531 /* UserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTests.m; sourceTree = "<group>"; };
 		7672CC9D1D1D6628005C58F1 /* PostToInstagramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostToInstagramViewController.h; sourceTree = "<group>"; };
 		7672CC9E1D1D6628005C58F1 /* PostToInstagramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostToInstagramViewController.m; sourceTree = "<group>"; };
 		768878DB1D0EF800007E581C /* MediaFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaFullScreenViewController.h; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			children = (
 				76B19E301CFF2A950033AC62 /* BlocstagramTests.m */,
 				76B19E321CFF2A950033AC62 /* Info.plist */,
+				765717EC1D2388170035C531 /* UserTests.m */,
 			);
 			path = BlocstagramTests;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				765717ED1D2388170035C531 /* UserTests.m in Sources */,
 				76B19E311CFF2A950033AC62 /* BlocstagramTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
