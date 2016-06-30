@@ -19,6 +19,9 @@
 		768878DD1D0EF800007E581C /* MediaFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768878DC1D0EF800007E581C /* MediaFullScreenViewController.m */; };
 		768878E01D173D31007E581C /* CircleSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 768878DF1D173D31007E581C /* CircleSpinnerView.m */; };
 		768878E31D173FD3007E581C /* LikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 768878E21D173FD3007E581C /* LikeButton.m */; };
+		76A1B2671D25615300F6CA04 /* MediaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A1B2661D25615300F6CA04 /* MediaTests.m */; };
+		76A1B2691D25616600F6CA04 /* MediaTableViewCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A1B2681D25616600F6CA04 /* MediaTableViewCellTests.m */; };
+		76A1B26B1D25617500F6CA04 /* ComposeCommentViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A1B26A1D25617500F6CA04 /* ComposeCommentViewTest.m */; };
 		76B19E181CFF2A950033AC62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E171CFF2A950033AC62 /* main.m */; };
 		76B19E1B1CFF2A950033AC62 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E1A1CFF2A950033AC62 /* AppDelegate.m */; };
 		76B19E231CFF2A950033AC62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76B19E221CFF2A950033AC62 /* Assets.xcassets */; };
@@ -80,6 +83,9 @@
 		768878DF1D173D31007E581C /* CircleSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleSpinnerView.m; sourceTree = "<group>"; };
 		768878E11D173FD3007E581C /* LikeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeButton.h; sourceTree = "<group>"; };
 		768878E21D173FD3007E581C /* LikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeButton.m; sourceTree = "<group>"; };
+		76A1B2661D25615300F6CA04 /* MediaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaTests.m; sourceTree = "<group>"; };
+		76A1B2681D25616600F6CA04 /* MediaTableViewCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaTableViewCellTests.m; sourceTree = "<group>"; };
+		76A1B26A1D25617500F6CA04 /* ComposeCommentViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeCommentViewTest.m; sourceTree = "<group>"; };
 		76B19E131CFF2A950033AC62 /* Blocstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76B19E171CFF2A950033AC62 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		76B19E191CFF2A950033AC62 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -171,9 +177,9 @@
 				76B19E3B1CFF2C150033AC62 /* images */,
 				76B19E5F1D0075D50033AC62 /* MediaTableViewCell.h */,
 				76B19E601D0075D50033AC62 /* MediaTableViewCell.m */,
-				76BB50D21D183152001057C8 /* ComposeCommentView.h */,
 				763904B11D1C2EE4006E0D59 /* CropBox.h */,
 				763904B21D1C2EE4006E0D59 /* CropBox.m */,
+				76BB50D21D183152001057C8 /* ComposeCommentView.h */,
 				76BB50D31D183152001057C8 /* ComposeCommentView.m */,
 				7672CC9D1D1D6628005C58F1 /* PostToInstagramViewController.h */,
 				7672CC9E1D1D6628005C58F1 /* PostToInstagramViewController.m */,
@@ -229,6 +235,9 @@
 				76B19E301CFF2A950033AC62 /* BlocstagramTests.m */,
 				76B19E321CFF2A950033AC62 /* Info.plist */,
 				765717EC1D2388170035C531 /* UserTests.m */,
+				76A1B2661D25615300F6CA04 /* MediaTests.m */,
+				76A1B2681D25616600F6CA04 /* MediaTableViewCellTests.m */,
+				76A1B26A1D25617500F6CA04 /* ComposeCommentViewTest.m */,
 			);
 			path = BlocstagramTests;
 			sourceTree = "<group>";
@@ -445,7 +454,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A1B2671D25615300F6CA04 /* MediaTests.m in Sources */,
 				765717ED1D2388170035C531 /* UserTests.m in Sources */,
+				76A1B2691D25616600F6CA04 /* MediaTableViewCellTests.m in Sources */,
+				76A1B26B1D25617500F6CA04 /* ComposeCommentViewTest.m in Sources */,
 				76B19E311CFF2A950033AC62 /* BlocstagramTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
