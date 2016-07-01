@@ -24,18 +24,7 @@
 @end
 
 @implementation DataSource
-- (void) createOperationManager {
-    NSURL *baseURL = [NSURL URLWithString:@"https://api.instagram.com/v1/"];
-    self.instagramOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
-    
-    AFJSONResponseSerializer *jsonSerializer = [AFJSONResponseSerializer serializer];
-    
-    AFImageResponseSerializer *imageSerializer = [AFImageResponseSerializer serializer];
-    imageSerializer.imageScale = 1.0;
-    
-    AFCompoundResponseSerializer *serializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[jsonSerializer, imageSerializer]];
-    self.instagramOperationManager.responseSerializer = serializer;
-}
+
 
 + (instancetype) sharedInstance {
     static dispatch_once_t once;
@@ -45,6 +34,11 @@
     });
     return sharedInstance;
 }
++ (NSString *) instagramClientID {
+    return @"e3a7b34bb12f4e299e2ca0890232809d";
+};
+
+
 
 - (instancetype) init {
     self = [super init];
@@ -79,6 +73,18 @@
     
     return self;
 }
+- (void) createOperationManager {
+    NSURL *baseURL = [NSURL URLWithString:@"https://api.instagram.com/v1/"];
+    self.instagramOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+    
+    AFJSONResponseSerializer *jsonSerializer = [AFJSONResponseSerializer serializer];
+    
+    AFImageResponseSerializer *imageSerializer = [AFImageResponseSerializer serializer];
+    imageSerializer.imageScale = 1.0;
+    
+    AFCompoundResponseSerializer *serializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[jsonSerializer, imageSerializer]];
+    self.instagramOperationManager.responseSerializer = serializer;
+}
 
 - (void) registerForAccessTokenNotification {
     [[NSNotificationCenter defaultCenter] addObserverForName:LoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
@@ -90,11 +96,49 @@
     }];
 }
 
-+ (NSString *) instagramClientID {
-    return @"e3a7b34bb12f4e299e2ca0890232809d";
+- (void) requestNewItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler {
+    self.thereAreNoMoreOlderMessages = NO;
+    
+    if (self.isRefreshing == NO) {
+        self.isRefreshing = YES;
+        // #2
+        NSString *minID = [[self.mediaItems firstObject] idNumber];
+        NSDictionary *parameters;
+        
+        if (minID) {
+            parameters = @{@"min_id": minID};
+        }
+        
+        [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
+            self.isRefreshing = NO;
+            
+            if (completionHandler) {
+                completionHandler(error);
+            }
+        }];    }
 }
 
-\
+- (void) requestOldItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler {
+    if (self.isLoadingOlderItems == NO && self.thereAreNoMoreOlderMessages == NO) {
+        self.isLoadingOlderItems = YES;
+        
+        NSString *maxID = [[self.mediaItems lastObject] idNumber];
+        NSDictionary *parameters;
+        
+        if (maxID) {
+            parameters = @{@"max_id": maxID};
+        }
+        
+        [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
+            self.isLoadingOlderItems = NO;
+            if (completionHandler) {
+                completionHandler(error);
+            }
+        }];    }
+}
+
+
+
 - (void) populateDataWithParameters:(NSDictionary *)parameters completionHandler:(NewItemCompletionBlock)completionHandler {
     if (self.accessToken) {
         NSMutableDictionary *mutableParameters = [@{@"access_token": self.accessToken} mutableCopy];
@@ -183,46 +227,6 @@
     }
 }
 
-- (void) requestNewItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler {
-    self.thereAreNoMoreOlderMessages = NO;
-    
-    if (self.isRefreshing == NO) {
-        self.isRefreshing = YES;
-        // #2
-        NSString *minID = [[self.mediaItems firstObject] idNumber];
-        NSDictionary *parameters;
-        
-        if (minID) {
-            parameters = @{@"min_id": minID};
-        }
-        
-        [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
-            self.isRefreshing = NO;
-            
-            if (completionHandler) {
-                completionHandler(error);
-            }
-        }];    }
-}
-
-- (void) requestOldItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler {
-    if (self.isLoadingOlderItems == NO && self.thereAreNoMoreOlderMessages == NO) {
-        self.isLoadingOlderItems = YES;
-        
-        NSString *maxID = [[self.mediaItems lastObject] idNumber];
-        NSDictionary *parameters;
-        
-        if (maxID) {
-            parameters = @{@"max_id": maxID};
-        }
-        
-        [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
-            self.isLoadingOlderItems = NO;
-            if (completionHandler) {
-                completionHandler(error);
-            }
-        }];    }
-}
 
 - (void) downloadImageForMediaItem:(Media *)mediaItem {
     if (mediaItem.mediaURL && !mediaItem.image) {
