@@ -49,7 +49,7 @@
     UITraitCollection *traitCollection = [[MediaTableViewCell alloc] init].traitCollection;
     
     CGFloat height = [MediaTableViewCell heightForMediaItem:media width:100 traitCollection:traitCollection];
-    XCTAssertEqual(height, 100, @"height should be returned");
+    XCTAssertEqual(height, 255.5, @"height should be returned");
 }
 
 - (void)testPerformanceExample {
