@@ -20,16 +20,19 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Alamofire (3.4.0)
   - UICKeyChainStore (2.1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6)
+  - Alamofire (~> 3.4)
   - UICKeyChainStore
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
 
-PODFILE CHECKSUM: 1cfcd44db278ac1e0cd8c87556471d3767fe0343
+PODFILE CHECKSUM: addd76523aca0194c9d7697530c0b68a23e49b58
 
 COCOAPODS: 1.0.1

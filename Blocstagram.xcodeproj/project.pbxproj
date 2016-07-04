@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		099E9FD6A01F5D894E148CDA /* Pods_Blocstagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44CE02D8C796AA3362D74FD /* Pods_Blocstagram.framework */; };
 		761F15291D09B0E400BA38A4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 761F15281D09B0E400BA38A4 /* LoginViewController.m */; };
 		763904B31D1C2EE4006E0D59 /* CropBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 763904B21D1C2EE4006E0D59 /* CropBox.m */; };
 		763904B61D1C3078006E0D59 /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 763904B51D1C3078006E0D59 /* CropImageViewController.m */; };
@@ -41,7 +42,6 @@
 		76B19E5E1CFFED480033AC62 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E5D1CFFED480033AC62 /* DataSource.m */; };
 		76B19E611D0075D50033AC62 /* MediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B19E601D0075D50033AC62 /* MediaTableViewCell.m */; };
 		76BB50D41D183152001057C8 /* ComposeCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BB50D31D183152001057C8 /* ComposeCommentView.m */; };
-		F5EB3576BB3E10EFADACDA47 /* libPods-Blocstagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 790512C1A3632508CE51AE79 /* libPods-Blocstagram.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,7 +114,7 @@
 		76B19E601D0075D50033AC62 /* MediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaTableViewCell.m; path = ../MediaTableViewCell.m; sourceTree = "<group>"; };
 		76BB50D21D183152001057C8 /* ComposeCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeCommentView.h; sourceTree = "<group>"; };
 		76BB50D31D183152001057C8 /* ComposeCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeCommentView.m; sourceTree = "<group>"; };
-		790512C1A3632508CE51AE79 /* libPods-Blocstagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Blocstagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D44CE02D8C796AA3362D74FD /* Pods_Blocstagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blocstagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5EB3576BB3E10EFADACDA47 /* libPods-Blocstagram.a in Frameworks */,
+				099E9FD6A01F5D894E148CDA /* Pods_Blocstagram.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +253,7 @@
 		A96C35005D406A6B56949C4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				790512C1A3632508CE51AE79 /* libPods-Blocstagram.a */,
+				D44CE02D8C796AA3362D74FD /* Pods_Blocstagram.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
