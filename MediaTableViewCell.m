@@ -167,6 +167,7 @@ static NSParagraphStyle *paragraphStyle;
         
         [self.contentView addConstraints:@[self.imageHeightConstraint, self.usernameAndCaptionLabelHeightConstraint, self.commentLabelHeightConstraint]];
     }
+//    self.hidden = YES;
     return self;
 }
 
